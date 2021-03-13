@@ -16,3 +16,19 @@ function addProjectToList() {
   `;
   projList.append(projRow);
 }
+
+// Remove project row
+function removeProjectFromList(el) {
+  if (el.classList.contains("remove")) {
+    el.parent().parent().remove();
+  }
+}
+
+// DOM Selectors
+// const projList = $("project-list");
+
+// Event listener on project remove button
+$("project-list").on("click", (e) => {
+  //
+  removeProjectFromList(e.target);
+});
