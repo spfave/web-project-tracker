@@ -19,22 +19,24 @@ function addProjectToList(proj) {
 }
 
 // Remove project row
-function removeProjectFromList(el) {
-  if (el.classList.contains("remove")) {
-    el.parent().parent().remove();
-  }
+function removeProjectFromList(event) {
+  // console.log(event.target); // is HTML element tag content
+  // console.log($(event.target)); // is HTML collection of event.target element(s)
+
+  const el = event.target;
+  el.closest("tr").remove();
+  // $(el).parent().parent().remove(); // .parent() only works on JQ found element
 }
 
 // DOM Selectors
-// const projList = $("project-list");
+const projList = $("#project-list");
 
 // Event listener on project remove button
-$("project-list").on("click", (e) => {
-  //
-  removeProjectFromList(e.target);
-});
+projList.on("click", ".remove", removeProjectFromList);
 
 // Webpage Execution
+
+// Testing
 const project = {
   name: "project1",
   type: "web dev",
