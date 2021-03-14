@@ -1,5 +1,3 @@
-// Render projects to table
-
 // Create project row to add to table project
 function addProjectToList(proj) {
   const projList = $("#project-list");
