@@ -41,7 +41,8 @@
             <li class="list-group-item">Hourly Rate</li>
           </ul>
           <div class="card-footer bg-dark">
-            <button class="btn btn-light btn-block">
+            <button type="button" class="btn btn-light btn-block font-weight-bold text-dark" data-toggle="modal"
+              data-target="#projectModal">
               Add Project
             </button>
           </div>
@@ -71,6 +72,64 @@
     </div>
   </main>
 
+  <!-- Modal: Project Data -->
+  <div id="projectModal" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-dark">
+          <h4 class="modal-title text-light">Add a new project</h4>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </div>
+
+        <form id="project-form">
+          <!-- Modal Body -->
+          <div class="modal-body bg-light">
+            <div class="form-group">
+              <label for="projectName">Project Name</label>
+              <input type="text" id="projectName" class="form-control" placeholder="Enter project name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="projectType">Project Type</label>
+              <select id="projectType" class="form-control">
+                <option selected disabled>Pick one...</option>
+                <option value="Web Application (front end)">Web Application (front end)</option>
+                <option value="Web Application (back end)">Web Application (back end)</option>
+                <option value="Web Application (fullstack)">Web Application (fullstack)</option>
+                <option value="Mobile Application">Mobile Application</option>
+                <option value="Progressive Web App">Progressive Web App</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="hourlyRate">Hourly Rate</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input type="number" id="hourlyRate" class="form-control" min="0" placeholder="$rate/hr" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="dueDate">Due Date</label>
+              <input type="text" id="dueDate" class="form-control" min="1" placeholder="When is the project due?"
+                required>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer bg-dark">
+            <button type="submit" class="btn btn-light font-weight-bold text-dark" data-dismiss="modal">Submit
+              Project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- JS Imports: JQuery, Bootstrap JS, moment.js -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
