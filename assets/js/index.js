@@ -1,3 +1,20 @@
+// DOM SELECTORS:
+const projList = $("#project-list");
+const dateTime = $("#date-time");
+
+// FUNCTIONS:
+//Show date and time immediately and update per second
+function updateDateTime() {
+  // Get current date and time and display to header
+  const displayDateTime = () => {
+    const now = moment().format("dddd, MMM D, YYYY - h:mm:ss a");
+    dateTime.text(now);
+  };
+
+  displayDateTime;
+  setInterval(displayDateTime, 1000);
+}
+
 // Create project row to add to table project
 function addProjectToList(proj) {
   const projList = $("#project-list");
@@ -26,15 +43,15 @@ function removeProjectFromList(event) {
   // $(el).parent().parent().remove(); // .parent() only works on JQ found element
 }
 
-// DOM Selectors
-const projList = $("#project-list");
-
+// EVENT CONTROL:
 // Event listener on project remove button
 projList.on("click", ".remove", removeProjectFromList);
 
 // Webpage Execution
 
 // Testing
+updateDateTime();
+
 const project = {
   name: "project1",
   type: "web dev",
