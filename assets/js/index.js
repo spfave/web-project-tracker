@@ -1,6 +1,8 @@
 // DOM SELECTORS:
-const projList = $("#project-list");
 const dateTime = $("#date-time");
+const projModal = $("#project-modal");
+const projForm = $("#project-form");
+const projList = $("#project-list");
 
 // FUNCTIONS:
 //Show date and time immediately and update per second
@@ -13,6 +15,38 @@ function updateDateTime() {
 
   displayDateTime;
   setInterval(displayDateTime, 1000);
+}
+
+// Process project information input for table display
+function submitProject(event) {
+  event.preventDefault();
+  console.log("test");
+
+  // Create project object
+  const project = {
+    name: $("#proj-input-name").val().trim(),
+    type: $("#proj-input-type").val().trim(),
+    rate: $("#proj-input-rate").val().trim(),
+    dueDate: $("#proj-input-due-date").val().trim(),
+  };
+  project.numDaysDue = calcDaysDue(project.dueDate);
+  project.earning = calcProjEarnings(project.numDaysDue, project.rate);
+
+  // Add project to list
+  addProjectToList(project);
+
+  // Clear and close project modal
+  projForm[0].reset();
+  projModal.modal("hide");
+}
+
+function calcDaysDue(dueDate) {
+  const today = moment();
+  return moment(dueDate, "MM/DD/YYYY").diff(today, "days") + 1;
+}
+
+function calcProjEarnings(numDaysDue, rate) {
+  return numDaysDue * 8 * rate;
 }
 
 // Create project row to add to table project
@@ -44,21 +78,14 @@ function removeProjectFromList(event) {
 }
 
 // EVENT CONTROL:
+// Event listener on project form submit button
+projForm.on("submit", submitProject);
+
 // Event listener on project remove button
 projList.on("click", ".remove", removeProjectFromList);
 
+// JQuery UI datepicker on due date input
+$("#proj-input-due-date").datepicker({ minDate: "+1d" });
+
 // Webpage Execution
-
-// Testing
 updateDateTime();
-
-const project = {
-  name: "project1",
-  type: "web dev",
-  rate: "120",
-  dueDate: "8/1/21",
-  numDaysDue: "100",
-  earning: "1200",
-};
-
-addProjectToList(project);
